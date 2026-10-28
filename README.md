@@ -26,7 +26,7 @@
 
 ## 下载与安装
 
-安装包通过本仓库的 **Releases** 提供，源代码压缩包不是安装包。
+安装包通过本仓库的 [**Releases**](https://github.com/changanhe/Waylore/releases) 提供，源代码压缩包不是安装包。
 
 | 设备 | 安装包 | 说明 |
 | --- | --- | --- |

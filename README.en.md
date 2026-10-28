@@ -25,7 +25,7 @@ The new Windows, phone and Android tablet clients share the Flutter application 
 
 ## Downloads
 
-Use the repository's **Releases** section. Source archives are not installers.
+Use the repository's [**Releases**](https://github.com/changanhe/Waylore/releases) section. Source archives are not installers.
 
 | Platform | File |
 | --- | --- |
