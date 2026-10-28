@@ -38,6 +38,8 @@ jobs:
       - name: Create installer and portable package
         shell: pwsh
         run: |
+          $version = (Get-Item mobile/build/windows/x64/runner/Release/Waylore.exe).VersionInfo.ProductVersion
+          if ($version -ne '1.0.0') { throw "Unexpected public Windows version: $version" }
           New-Item -ItemType Directory -Force dist/unified-release | Out-Null
           & 'C:/Program Files (x86)/Inno Setup 6/ISCC.exe' mobile/windows-installer.iss
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }

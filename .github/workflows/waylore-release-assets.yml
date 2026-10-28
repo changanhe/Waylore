@@ -37,4 +37,4 @@ jobs:
         working-directory: packages
         run: |
           sha256sum -c SHA256SUMS-Windows.txt
-          gh release upload v1.0.0 Kexinglu-Setup-1.0.0.exe Waylore-Windows-1.0.0-portable.zip SHA256SUMS-Windows.txt
+          gh release upload v1.0.0 --clobber Kexinglu-Setup-1.0.0.exe Waylore-Windows-1.0.0-portable.zip SHA256SUMS-Windows.txt
