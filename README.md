@@ -24,6 +24,16 @@
 - **你的阅读习惯**：主题、个人背景、系统默认字体、书页宋体与霞鹜文楷；保留减少动态效果选项。
 - **可选账号与同步**：本机功能不强制登录。账号和同步按配置提供，个人记录不会因为切换界面语言而翻译。
 
+## 平板界面
+
+以下为安卓平板模拟器中的实际界面，使用测试数据。
+
+![Tablet home](docs/screenshots/tablet-home.png)
+
+![Travel map](docs/screenshots/tablet-travel.png)
+
+![Landscape notebook](docs/screenshots/tablet-notebook-editor.png)
+
 ## 下载与安装
 
 安装包通过本仓库的 [**Releases**](https://github.com/changanhe/Waylore/releases) 提供，源代码压缩包不是安装包。

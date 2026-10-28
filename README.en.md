@@ -23,6 +23,16 @@ The new Windows, phone and Android tablet clients share the Flutter application 
 - **Personal appearance:** themes, cover backgrounds, system fonts, bundled serif and handwriting fonts, and a reduced-motion option.
 - **Optional accounts:** core local recording needs no sign-in. Online account and synchronization features depend on the configured services.
 
+## Tablet preview
+
+Actual Android tablet emulator captures using test data.
+
+![Tablet home](docs/screenshots/tablet-home.png)
+
+![Travel map](docs/screenshots/tablet-travel.png)
+
+![Landscape notebook](docs/screenshots/tablet-notebook-editor.png)
+
 ## Downloads
 
 Use the repository's [**Releases**](https://github.com/changanhe/Waylore/releases) section. Source archives are not installers.
