@@ -1,0 +1,40 @@
+name: Attach verified Windows packages
+on:
+  workflow_dispatch:
+    inputs:
+      build_run:
+        description: Successful Waylore Windows build run ID
+        required: true
+        type: string
+permissions:
+  actions: read
+  contents: write
+concurrency:
+  group: waylore-release-assets
+  cancel-in-progress: false
+jobs:
+  attach:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GH_REPO: ${{ github.repository }}
+      SOURCE_RUN: ${{ inputs.build_run }}
+    steps:
+      - name: Require a successful build and an existing draft
+        run: |
+          [[ "$SOURCE_RUN" =~ ^[0-9]+$ ]]
+          valid=$(gh api "repos/$GH_REPO/actions/runs/$SOURCE_RUN" --jq '.conclusion == "success" and .head_branch == "main" and .path == ".github/workflows/waylore-windows.yml"')
+          test "$valid" = true
+          test "$(gh release view v1.0.0 --json isDraft --jq .isDraft)" = true
+      - uses: actions/download-artifact@v4
+        with:
+          name: Waylore-Windows-1.0.0
+          path: packages
+          run-id: ${{ inputs.build_run }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Verify checksums and attach packages to the draft
+        working-directory: packages
+        run: |
+          sha256sum -c SHA256SUMS-Windows.txt
+          gh release upload v1.0.0 Kexinglu-Setup-1.0.0.exe Waylore-Windows-1.0.0-portable.zip SHA256SUMS-Windows.txt
