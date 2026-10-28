@@ -23,9 +23,11 @@ The new Windows, phone and Android tablet clients share the Flutter application 
 - **Personal appearance:** themes, cover backgrounds, system fonts, bundled serif and handwriting fonts, and a reduced-motion option.
 - **Optional accounts:** core local recording needs no sign-in. Online account and synchronization features depend on the configured services.
 
-## Tablet preview
+## Desktop and tablet preview
 
-Actual Android tablet emulator captures using test data.
+Actual Windows and Android tablet emulator captures using isolated test data.
+
+![Windows home](docs/screenshots/windows-home.png)
 
 ![Tablet home](docs/screenshots/tablet-home.png)
 
