@@ -1,0 +1,56 @@
+name: Waylore Windows 1.0.0
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  windows:
+    runs-on: windows-2022
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.47.7'
+          channel: stable
+      - name: Resolve shared phone, tablet and desktop dependencies
+        working-directory: mobile
+        run: flutter pub get
+      - name: Analyze and test
+        working-directory: mobile
+        run: |
+          flutter analyze --no-pub
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          flutter test --no-pub
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Build Windows desktop
+        working-directory: mobile
+        run: flutter build windows --release --no-pub --build-name 1.0.0 --build-number 45
+      - name: Native startup smoke test
+        run: python tools/smoke_unified_windows.py --exe mobile/build/windows/x64/runner/Release/Waylore.exe
+      - name: Bundle Visual C++ runtime
+        shell: pwsh
+        run: |
+          $runtime = Get-ChildItem 'C:/Program Files/Microsoft Visual Studio/2022/Enterprise/VC/Redist/MSVC/*/x64/Microsoft.VC143.CRT' -Directory | Sort-Object FullName | Select-Object -Last 1
+          if (-not $runtime) { throw 'Visual C++ runtime not found' }
+          Copy-Item "$($runtime.FullName)/*.dll" mobile/build/windows/x64/runner/Release/
+      - name: Create installer and portable package
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force dist/unified-release | Out-Null
+          & 'C:/Program Files (x86)/Inno Setup 6/ISCC.exe' mobile/windows-installer.iss
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          Compress-Archive -Path mobile/build/windows/x64/runner/Release/* -DestinationPath dist/unified-release/Waylore-Windows-1.0.0-portable.zip
+          Get-FileHash dist/unified-release/* -Algorithm SHA256 | ForEach-Object { "$($_.Hash.ToLower())  $(Split-Path $_.Path -Leaf)" } | Set-Content dist/unified-release/SHA256SUMS-Windows.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Waylore-Windows-1.0.0
+          path: dist/unified-release/*
+          retention-days: 7
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: Waylore-Windows-validation
+          path: build/windows-smoke.log
+          retention-days: 7
