@@ -13,6 +13,7 @@ jobs:
         with:
           flutter-version: '3.47.7'
           channel: stable
+          cache: true
       - name: Resolve shared phone, tablet and desktop dependencies
         working-directory: mobile
         run: flutter pub get

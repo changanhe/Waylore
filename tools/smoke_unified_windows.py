@@ -1,5 +1,6 @@
 """Launch the new Flutter Windows package with an isolated temporary database."""
 import argparse
+from contextlib import closing
 import os
 from pathlib import Path
 import sqlite3
@@ -28,13 +29,18 @@ def main():
                         raise RuntimeError('Windows app exited before opening its database')
                     if database.is_file():
                         try:
-                            with sqlite3.connect(f'file:{database.as_posix()}?mode=ro', uri=True) as connection:
+                            with closing(sqlite3.connect(f'file:{database.as_posix()}?mode=ro', uri=True)) as connection:
                                 tables = {r[0] for r in connection.execute("SELECT name FROM sqlite_master WHERE type='table'")}
                             if {'entries', 'settings'} <= tables:
                                 time.sleep(3)
                                 if process.poll() is not None:
                                     raise RuntimeError('Windows app exited after initialization')
-                                print('PASS: Windows release initialized its own SQLite database and stayed running.')
+                                second = subprocess.run([str(executable)], cwd=executable.parent,
+                                    env=environment, stdout=stream, stderr=subprocess.STDOUT,
+                                    timeout=15)
+                                if second.returncode != 0 or process.poll() is not None:
+                                    raise RuntimeError('Existing-window activation failed')
+                                print('PASS: Windows release initialized SQLite, stayed running and reused its existing window.')
                                 return
                         except sqlite3.Error:
                             pass
