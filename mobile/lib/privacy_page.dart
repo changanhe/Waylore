@@ -41,7 +41,18 @@ class PrivacyPage extends StatelessWidget {
     body: SelectionArea(
       child: ListView(
         key: const ValueKey('privacy-content'),
-        padding: const EdgeInsets.fromLTRB(24, 12, 24, 40),
+        padding: EdgeInsets.fromLTRB(
+          ((MediaQuery.sizeOf(context).width - 760) / 2).clamp(
+            24,
+            double.infinity,
+          ),
+          12,
+          ((MediaQuery.sizeOf(context).width - 760) / 2).clamp(
+            24,
+            double.infinity,
+          ),
+          40,
+        ),
         children: [
           Text(
             '客行录 · Waylore\n更新日期：2026年10月28日',

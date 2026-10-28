@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+
 import 'platform_support.dart';
 import 'privacy_page.dart';
 import 'feedback.dart';
@@ -778,7 +779,9 @@ class ProfileBackupScreen extends StatelessWidget {
                       palette: p,
                       icon: Icons.restore_rounded,
                       title: '从备份导入',
-                      subtitle: defaultTargetPlatform == TargetPlatform.windows ? '支持新版 JSON 与旧版电脑数据库，不清空现有记录' : '合并记录，不会清空现有内容',
+                      subtitle: defaultTargetPlatform == TargetPlatform.windows
+                          ? '支持新版 JSON 与旧版电脑数据库，不清空现有记录'
+                          : '合并记录，不会清空现有内容',
                       onTap: () => backupData(context, store, restore: true),
                       trailing: Icon(
                         Icons.chevron_right_rounded,
@@ -841,7 +844,18 @@ class ProfileAboutScreen extends StatelessWidget {
             ProfilePageHeader(title: '关于', kicker: 'ABOUT', palette: palette),
             Expanded(
               child: ListView(
-                padding: const EdgeInsets.fromLTRB(24, 20, 24, 34),
+                padding: EdgeInsets.fromLTRB(
+                  ((MediaQuery.sizeOf(context).width - 760) / 2).clamp(
+                    24,
+                    double.infinity,
+                  ),
+                  20,
+                  ((MediaQuery.sizeOf(context).width - 760) / 2).clamp(
+                    24,
+                    double.infinity,
+                  ),
+                  34,
+                ),
                 children: [
                   Center(
                     child: Container(
