@@ -1,6 +1,8 @@
+> 当前正式 Windows 版使用根目录的 Python / Flet 实现。下文关于 Flutter Windows 的内容仅属于未采用的实验实现；本目录当前主要维护安卓手机和平板。
+
 # Waylore · 客行录 1.0.0
 
-这里是当前 Windows、Android 手机和安卓平板共用的 Flutter 源码。请在 VS Code 或 Android Studio 中打开本目录，运行 `lib/main.dart`。项目根目录的 Python 程序是旧版桌面客户端。
+这里是 Android 手机与安卓平板的 Flutter 源码。请在 VS Code 或 Android Studio 中打开本目录，运行 `lib/main.dart`。项目根目录的 Python 程序是当前正式桌面客户端。
 
 ## 预览与构建
 

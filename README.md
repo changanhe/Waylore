@@ -1,87 +1,45 @@
-<div align="center">
-<img src="assets/app.png" width="88" alt="Waylore 客行录" />
-
 # Waylore · 客行录
 
-**把旅途与日常，收进自己的故事里。**
+把旅途与日常，收进自己的故事里。
 
-本地优先的旅行与生活记录应用，面向 Windows、Android 手机与安卓平板。记录旅行、收藏票根、排一本手帐，也留下喜欢的一餐与一部电影。
+[English](README.en.md) · [下载安装包](https://github.com/changanhe/Waylore/releases/tag/v1.0.0) · [支持开发](docs/SUPPORT.md)
 
-[English](README.en.md) · [安装与数据说明](docs/UNIFIED-RELEASE.md) · [支持开发](docs/SUPPORT.md)
+## Windows：保留原来的桌面界面
 
-</div>
+Windows 正式版已恢复为原来的 Python / Flet 客户端：山水背景、大时钟、六项底部导航，以及原有旅行日志、票根、食光、影视和手帐布局。后续以这套界面为基础做局部优化，不用手机布局替代桌面设计。版本保持 **1.0.0**。
 
-## 一套界面，陪你在不同设备上记录
+![Windows 原有桌面界面](docs/screenshots/windows-home.png)
 
-新版 Windows、手机与安卓平板复用 `mobile/` 中的 Flutter 界面。公开版本名均为 **1.0.0**；安卓使用内部构建号区分更新，升级请覆盖安装。
+Windows 源码入口是根目录 `main.py`，打包使用 `build.py` 和 `build_installer.py`。`mobile/windows/` 保留为未采用的实验实现，不是当前正式 Windows 版本。
 
-- **旅行与照片**：按地点、日期保存旅途，在离线矢量地图上回看足迹。地图为纪念性示意，不用于实际导航。
-- **机票与铁路票根**：收藏票根、翻看正反面、查看起终点轨迹；铁路票根背面默认显示“人民铁路为人民”。票根不是实际乘车或登机凭证。
-- **旅行手帐**：文字、照片、38款原创图形素材与快捷符号自由排版，12种纸张，平滑、折页、书页、淡入四种翻页效果；横屏编辑使用侧边工具栏。
-- **旅途配乐**：12首内置离线器乐，支持导入不超过50MB的MP3。按每条旅行记录、每本手帐保存选择，打开时自动播放；悬浮唱片展开进度、音量、循环与换曲。
-- **食光与影视**：记录一餐一味、海报、最多三位主演、评分和感悟。新收藏默认5分，在线影视资料仍需核对。
-- **每日寄语与生日**：首页简短寄语按日期轮换；常见中国及国际节日提供问候。生日当天开屏祝福每次打开呈现，首页彩带在同一设备、同一账号当天出现一次。
-- **你的阅读习惯**：主题、个人背景、系统默认字体、书页宋体与霞鹜文楷；保留减少动态效果选项。
-- **可选账号与同步**：本机功能不强制登录。账号和同步按配置提供，个人记录不会因为切换界面语言而翻译。
+## 安卓手机与安卓平板
 
-## 电脑与平板界面
+安卓继续使用 `mobile/` 下的 Flutter 客户端，版本 **1.0.0**、内部构建45。支持旅行与照片、影视与食光、旅行手帐、38款原创图形素材、12种纸张、四种翻页效果、12首内置配乐及MP3导入、悬浮唱片、每日寄语和生日祝福。平板支持双栏、横竖屏和横屏手帐工具栏。
 
-以下为 Windows 本机与安卓平板模拟器中的实际界面，使用测试数据。
+以上安卓功能不表示已经全部移植到 Windows。两个客户端分别保持适合各自设备的布局。
 
-![Windows home](docs/screenshots/windows-home.png)
+![安卓平板](docs/screenshots/tablet-home.png)
 
-![Tablet home](docs/screenshots/tablet-home.png)
+## 下载与数据
 
-![Travel map](docs/screenshots/tablet-travel.png)
+- [Windows 安装包](https://github.com/changanhe/Waylore/releases/download/v1.0.0/Kexinglu-Setup-1.0.0.exe)：Windows 10 / 11 x64，原版桌面界面，无需另外安装Python。
+- [安卓手机／平板安装包](https://github.com/changanhe/Waylore/releases/download/v1.0.0/Kexinglu-Android-1.0.0.apk)：Android 7及以上，覆盖安装即可更新。
+- 发布页附有SHA-256校验文件。此前采用手机布局的Windows便携包已撤下。
 
-![Landscape notebook](docs/screenshots/tablet-notebook-editor.png)
+原版Windows继续使用原有数据目录，通常位于 `%LOCALAPPDATA%/客行录` 或用户自选位置。退出应用后覆盖安装到原安装位置，不要先卸载或清除数据。若在此前实验Windows界面新增过记录，请先在该界面导出备份；实验版 `%LOCALAPPDATA%/Waylore` 中的数据不会自动并入原版，也不会在此次恢复中删除。
 
-## 下载与安装
+更多说明见[安装与恢复说明](docs/UNIFIED-RELEASE.md)及[验证记录](docs/VALIDATION-1.0.0.md)。
 
-安装包通过本仓库的 [**Releases**](https://github.com/changanhe/Waylore/releases) 提供，源代码压缩包不是安装包。
+## 开发
 
-| 设备 | 安装包 | 说明 |
-| --- | --- | --- |
-| Windows 10 1809 / Windows 11 x64 | `Kexinglu-Setup-1.0.0.exe` | 新版统一界面的安装程序；安装到已有目录前先退出客行录。 |
-| Windows x64 便携版 | `Waylore-Windows-1.0.0-portable.zip` | 解压整个文件夹后运行 `Waylore.exe`，不能只复制EXE。 |
-| Android 手机 / 安卓平板 | `Kexinglu-Android-1.0.0.apk` | Android 7及以上；同一包支持横竖屏、平板双栏与分屏。 |
+Windows：安装 `requirements.txt` 中的依赖后运行 `python main.py`；打包流程见 `build.py` 和 `build_installer.py`。安卓：在VS Code或Android Studio打开 `mobile/`，执行 `flutter pub get` 和 `flutter run`。
 
-Windows包只有构建和原生启动验证完成后才会加入正式发布。当前 Windows 构建流程见 `.github/workflows/waylore-windows.yml`。未验证的产物不会标注为已验证版本。Linux、macOS与原生鸿蒙不属于本轮发布；旧工程保留在仓库中作为历史实现。
-
-安装包尚无商业 Windows 代码签名，可用发布页SHA-256核对文件。不要卸载旧版或清除数据来解决升级问题；遇到签名不匹配请先保留记录并联系支持。
-
-## 数据属于你
-
-核心记录保存在本机。天气、城市查询、影视资料和可选账号服务需要网络；登录后编辑资料可能更新云端账号资料，手动同步会上传所选账号的记录与照片。
-
-新版支持包含照片的JSON备份。Windows用户可在「我的 → 数据备份 → 从备份导入」选择旧版 `yingjianlu.db`；只读读取原库、合并到新版，已导入记录会跳过。旧资料目录保留，缺失的原照片会提示。新版Windows数据库默认位于 `%LOCALAPPDATA%\Waylore`，旧版资料不会自动清除。
-
-配乐及MP3目前保存在各设备本机，不随JSON备份、HTML分享或云同步迁移。请另行保存原音频。更详细的联网、权限和删除说明可在「我的 → 关于 → 隐私政策」离线阅读。
-
-## 从源码开发
-
-当前统一客户端在 **`mobile/`**，入口 **`mobile/lib/main.dart`**。仓库根目录的Python/Flet文件是旧桌面实现，不是新版Flutter入口。
-
-```sh
-cd mobile
-flutter pub get
-flutter analyze
-flutter test
-flutter run
-```
-
-已使用 Flutter **3.47.7 / Dart 3.13.5**。Windows编译还需要带C++桌面组件的Visual Studio工具链；安卓编译需要Android SDK和JDK。Windows与Android可分别执行 `flutter build windows --release` 和 `flutter build apk --release`。
-
-发布签名、管理员密钥、私人配置和用户数据库不在仓库中。自己编译的安卓包需要自己的签名，不能覆盖由另一密钥签名的现有安装。云端公开配置与可选服务说明见 [cloud/SETUP.zh-CN.md](cloud/SETUP.zh-CN.md)。
+用户数据库、签名私钥和本机配置不应提交。可选云服务见 [cloud/SETUP.zh-CN.md](cloud/SETUP.zh-CN.md)。资源许可见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
 
 ## 一点心意，让故事继续
 
-如果Waylore帮你留住了一段旅程、一餐美味，或一个想再看一眼的瞬间，欢迎给项目一个Star、分享建议，或请开发者喝杯茶。
-
-**赞赏完全自愿，不解锁功能，也不影响正常使用。你的每一份支持，都会成为继续打磨客行录的动力。**
+如果客行录帮你留住了一段旅程、一餐美味，或一个想再看一眼的瞬间，欢迎分享建议，或请开发者喝杯茶。**赞赏完全自愿，不解锁功能，也不影响正常使用。**你的支持会帮助我们继续打磨客行录。
 
 <img src="docs/support/wechat.png" width="280" alt="开发者提供的微信赞赏码" />
 
-联系与支持：**kexinglu@yeah.net**。反馈时请隐去姓名、证件号码、精确行程和登录凭据，勿上传个人数据库、密码或验证码。
-
-资源来源与权利说明见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。源码公开不改变第三方资源的许可。
+联系与支持：**kexinglu@yeah.net**。
